@@ -18,6 +18,7 @@ class SignupWidget extends React.Component {
   }
 
   signup = (e) => {
+    
     if (e) { e.preventDefault(); }
     this.setState({
       error: '',

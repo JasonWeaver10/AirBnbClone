@@ -11,15 +11,15 @@ class Login extends React.Component {
     show_login: true,
   }
 
-  // componentDidMount() {
-  //   fetch('/api/authenticated')
-  //     .then(handleErrors)
-  //     .then(data => {
-  //       this.setState({
-  //         authenticated: data.authenticated,
-  //       })
-  //     })
-  // }
+  componentDidMount() {
+    fetch('/api/authenticated')
+      .then(handleErrors)
+      .then(data => {
+        this.setState({
+          authenticated: data.authenticated,
+        })
+      })
+  }
 
   toggle = () => {
     this.setState({

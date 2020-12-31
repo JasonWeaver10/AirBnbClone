@@ -8,10 +8,13 @@ import { handleErrors } from '@utils/fetchHelper';
 import './property.scss';
 
 class Property extends React.Component {
-  state = {
+  constructor(props) {
+    super(props);
+    this.state = {
     property: {},
     loading: true,
   }
+}
 
   componentDidMount() {
     fetch(`/api/properties/${this.props.property_id}`)
@@ -24,6 +27,7 @@ class Property extends React.Component {
       })
   }
 
+ 
   render () {
     const { property, loading } = this.state;
     if (loading) {
@@ -43,12 +47,15 @@ class Property extends React.Component {
       beds,
       baths,
       image_url,
+      images,
       user,
     } = property
 
     return (
       <Layout>
-        <div className="property-image mb-3" style={{ backgroundImage: `url(${image_url})` }} />
+        <div className="property-image mb-3" style={{ backgroundImage: `url(${images[0].image})` }} />
+        <div>
+        </div>
         <div className="container">
           <div className="row">
             <div className="info col-12 col-lg-8">
@@ -68,7 +75,14 @@ class Property extends React.Component {
               </div>
               <hr />
               <p>{description}</p>
-            </div>
+              <div className="thumbnail-images mb-3">
+              {images.map(function(item, index) {
+              return (
+                <img src={item.image} key={index} width="200" height="200" className="mr-3"></img>
+                )})}
+              </div>
+
+              </div>
             <div className="col-12 col-lg-5">
               <BookingWidget property_id={id} price_per_night={price_per_night} />
             </div>
@@ -80,3 +94,5 @@ class Property extends React.Component {
 }
 
 export default Property
+
+

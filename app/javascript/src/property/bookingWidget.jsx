@@ -52,20 +52,18 @@ class BookingWidget extends React.Component {
   }
 
   getPropertyBookings = () => {
-    fetch(`/api/properties/${this.props.property_id}/bookings`)
+    fetch(`/api/propertyBookings/${this.props.property_id}`)
       .then(handleErrors)
       .then(data => {
-        console.log(data);
         this.setState({
           existingBookings: data.bookings,
         })
       })
   }
 
-  submitBooking = () => {
+  submitBooking = (e) => {
     if (e) { e.preventDefault(); }
     const {startDate, endDate } = this.state;
-    console.log(startDate.format('MMM DD YYYY'), endDate.format("MMM DD YYYY"));
 
 
     fetch(`/api/bookings`, safeCredentials({
@@ -128,7 +126,14 @@ class BookingWidget extends React.Component {
               numberOfMonths={1}
 
             />
-          </div>          <button type="submit" className="btn btn-large btn-danger btn-block">Book</button>
+          </div> 
+          {days && (
+            <div className="d-flex justify-content-between">
+              <p>Total</p>
+              <p>${(price_per_night * days).toLocaleString()}</p>
+            </div>
+          )}         
+          <button type="submit" className="btn btn-large btn-danger btn-block">Book</button>
         </form>
       </div>
     )

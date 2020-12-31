@@ -1,5 +1,4 @@
 json.property do
-  json.id @property.id
   json.title @property.title
   json.description @property.description
   json.city @property.city
@@ -10,14 +9,7 @@ json.property do
   json.bedrooms @property.bedrooms
   json.beds @property.beds
   json.baths @property.baths
-  json.image_url @property.image_url
-  json.user do
-    json.id @property.user.id
-    json.username @property.user.username
-  end
-  json.images do
-    json.array! @property.images do |image|
-      json.image url_for(image)
-    end
-  end
+  json.user_id @property.user_id
+  json.images @property.images 
 end
+     

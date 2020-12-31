@@ -24,6 +24,7 @@ module Api
 
       if session
         @user = session.user
+        @user_id = session.user_id
         render 'api/sessions/authenticated', status: :ok
       else
         render json: {

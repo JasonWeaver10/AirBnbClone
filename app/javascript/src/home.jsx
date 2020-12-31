@@ -1,9 +1,9 @@
 // home.jsx
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Layout from '@src/layout';
-import { handleErrors } from '@utils/fetchHelper';
+import { safeCredentials, handleErrors } from '@utils/fetchHelper';
 import './home.scss';
+import Layout from '@src/layout';
 
 class Home extends React.Component {
   state = {
@@ -43,6 +43,8 @@ class Home extends React.Component {
       })
   }
 
+  
+
 
   render () {
     const { properties, next_page, loading } = this.state;
@@ -50,7 +52,7 @@ class Home extends React.Component {
       <Layout>
         <div className="container pt-4">
           <h4 className="mb-1">Top rated places to stay</h4>
-          <p className="text-secondary mb-3">Explore some fo the best-reviewed stays in the world</p>
+          <p className="text-secondary mb-3 d-inline">Explore some of the best-reviewed stays in the world</p>
           <div className="row">
             {properties.map(property => {
               return (
@@ -82,5 +84,4 @@ document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
     <Home />,
     document.body.appendChild(document.createElement('div')),
-  )
-})
+  )})

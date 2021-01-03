@@ -58,7 +58,7 @@ module Api
         )
       rescue JSON::ParserError => e
         # Invalid payload
-        return head :bad_request
+        return head :created
       rescue Stripe::SignatureVerificationError => e
         # Invalid signature
         return head :bad_request

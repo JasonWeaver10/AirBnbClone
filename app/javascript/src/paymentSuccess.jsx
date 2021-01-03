@@ -9,22 +9,21 @@ class PaymentSuccess extends React.Component {
   constructor(props) {
     super(props); 
       this.state = {
-      booking: [],
-      property: []
+      booking: {},
+      property: {}
       }
   }
 
   componentDidMount() {
     const re = (/\d+/)
     const bookingId = window.location.pathname.match(re, '').join();
-    console.log(bookingId);
     fetch(`/api/paymentSuccess/${bookingId}` )
           .then(handleErrors)
           .then(data => {
-            console.log(data.booking.property)
+            console.log(data.booking)
             this.setState({
               booking: data.booking,
-              property: data.booking.property
+              property: data.booking.property,
             })
           })
   }
@@ -37,11 +36,10 @@ class PaymentSuccess extends React.Component {
         <div className="container pt-4">
           <h2>Your Booking is Complete, Payment was Successful!</h2>
           <h4>Here is your booking information</h4>
+          <h3>Property Title: {property.title}</h3>
           <h5 className="text-secondary">Booking start date: {booking.start_date}</h5>
           <h5 className="text-secondary">Booking end date: {booking.end_date}</h5>
-          <a href={`/property/${property.id}`} className="text-body text-decoration-none">
-          <div className="property-image mb-1 rounded" style={{ backgroundImage: `url(${property.images_url})` }} />
-          </a>
+          <a href={`/property/${property.id}`} className="text-body text-decoration-none">View Property</a>
         </div>
       </Layout>
     )

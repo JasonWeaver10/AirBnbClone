@@ -6,6 +6,10 @@ json.booking do
   json.property do
     json.id @booking.property.id
     json.title @booking.property.title
-    json.images @booking.property.images
+    json.images do
+      json.array! @booking.property.images do |image|
+        json.image url_for(image)
+      end
+    end
   end
 end

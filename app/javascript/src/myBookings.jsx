@@ -25,6 +25,7 @@ class MyBookings extends React.Component {
     fetch(`./api/userBookings/`, safeCredentials())
           .then(handleErrors)
           .then(data => {
+            console.log(data.bookings)
             this.setState({
               bookings: data.bookings,
             })

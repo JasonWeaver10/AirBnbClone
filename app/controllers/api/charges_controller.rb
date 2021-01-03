@@ -44,21 +44,19 @@ module Api
   end
 
   def mark_complete
-  
-      # You can find your endpoint's secret in your webhook settings
-      endpoint_secret = ENV['STRIPE_MARK_COMPLETE_WEBHOOK_SIGNING_SECRET']
-      payload = request.body.read
-      event = nil
-      # Verify webhook signature and extract the event
-      # See https://stripe.com/docs/webhooks/signatures for more information.
-      sig_header = request.env['HTTP_STRIPE_SIGNATURE']
+     # You can find your endpoint's secret in your webhook settings
+     endpoint_secret = 'STRIPE_MARK_COMPLETE_WEBHOOK_SIGNING_SECRET'
+     payload = request.body.read
+     sig_header = request.env['HTTP_STRIPE_SIGNATURE']
+     event = nil
+     
       begin
         event = Stripe::Webhook.construct_event(
           payload, sig_header, endpoint_secret
         )
       rescue JSON::ParserError => e
         # Invalid payload
-        return head :created
+        return head :bad_request
       rescue Stripe::SignatureVerificationError => e
         # Invalid signature
         return head :bad_request
@@ -74,5 +72,8 @@ module Api
       end
       return head :bad_request
   end
+ 
+
+
   
 end

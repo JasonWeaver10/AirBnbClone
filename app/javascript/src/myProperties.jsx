@@ -24,7 +24,7 @@ class MyProperties extends React.Component {
             }
           })
     
-    fetch('./api/myProperties')
+    fetch('./api/myProperties', safeCredentials())
           .then(handleErrors)
           .then(data => {
             this.setState({

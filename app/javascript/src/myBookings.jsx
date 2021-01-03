@@ -22,7 +22,7 @@ class MyBookings extends React.Component {
               window.location = "/login"
             }
           })
-    fetch(`http://localhost:3000/api/userBookings/`)
+    fetch(`http://localhost:3000/api/userBookings/`, safeCredentials())
           .then(handleErrors)
           .then(data => {
             this.setState({

@@ -45,7 +45,7 @@ module Api
 
   def mark_complete
      # You can find your endpoint's secret in your webhook settings
-     endpoint_secret = 'STRIPE_MARK_COMPLETE_WEBHOOK_SIGNING_SECRET'
+     endpoint_secret = STRIPE_MARK_COMPLETE_WEBHOOK_SIGNING_SECRET
      payload = request.body.read
      sig_header = request.env['HTTP_STRIPE_SIGNATURE']
      event = nil

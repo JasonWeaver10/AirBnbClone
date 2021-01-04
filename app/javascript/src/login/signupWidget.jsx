@@ -85,6 +85,7 @@ class SignupWidget extends React.Component {
           <input name="username" type="text" className="form-control form-control-lg mb-3" placeholder="Username" value={username} onChange={this.handleChange} required />
           <input name="email" type="text" className="form-control form-control-lg mb-3" placeholder="Email" value={email} onChange={this.handleChange} required />
           <input name="password" type="password" className="form-control form-control-lg mb-3" placeholder="Password" value={password} onChange={this.handleChange} required />
+          <p>Password must be at least 5 characters long</p>
           <button type="submit" className="btn btn-danger btn-block btn-lg">Sign up</button>
         </form>
         <hr/>

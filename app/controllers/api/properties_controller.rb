@@ -1,6 +1,6 @@
 module Api
   class PropertiesController < ApplicationController
-    before_action :current_user
+    before_action :current_user, only: [:userProperties]
     
     def index
       @properties = Property.order(created_at: :desc).page(params[:page]).per(6)

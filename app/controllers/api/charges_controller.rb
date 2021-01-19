@@ -1,8 +1,6 @@
 module Api
   class ChargesController < ApplicationController
-
     skip_before_action :verify_authenticity_token, only: [:mark_complete]
-
 
     def create
       token = cookies.signed[:airbnb_session_token]
@@ -43,12 +41,12 @@ module Api
     end
 
     def mark_complete
-     # You can find your endpoint's secret in your webhook settings
-     endpoint_secret = ENV['STRIPE_MARK_COMPLETE_WEBHOOK_SIGNING_SECRET']
-     payload = request.body.read
-     sig_header = request.env['HTTP_STRIPE_SIGNATURE']
-     event = nil
-     
+      # You can find your endpoint's secret in your webhook settings
+      endpoint_secret = ENV['STRIPE_MARK_COMPLETE_WEBHOOK_SIGNING_SECRET']
+      payload = request.body.read
+      sig_header = request.env['HTTP_STRIPE_SIGNATURE']
+      event = nil
+
       begin
         event = Stripe::Webhook.construct_event(
           payload, sig_header, endpoint_secret
@@ -73,3 +71,4 @@ module Api
     end
   end
 end
+

@@ -41,9 +41,8 @@ module Api
         render json: { error: 'charge could not be created' }, status: :bad_request
       end
     end
-  end
 
-  def mark_complete
+    def mark_complete
      # You can find your endpoint's secret in your webhook settings
      endpoint_secret = ENV['STRIPE_MARK_COMPLETE_WEBHOOK_SIGNING_SECRET']
      payload = request.body.read
@@ -71,9 +70,6 @@ module Api
         return head :ok
       end
       return head :bad_request
+    end
   end
- 
-
-
-  
 end
